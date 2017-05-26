@@ -1,3 +1,15 @@
+module Contador
+	def << livro
+		push livro
+		if @maximo_necessario.nil? || @maximo_necessario < size
+			@maximo_necessario = size
+		end
+	end
+	def maximo_necessario
+		@maximo_necessario
+	end
+end
+
 class Livro
 	attr_reader :titulo, :preco, :ano_lancamento 
 	def initialize(titulo,preco,ano_lancamento,possui_reimpressao)
@@ -31,16 +43,15 @@ class Livro
 	end
 
 	def to_csv
-		"#{@titulo},#{@ano_lancamento},#{@preco}"
+		puts "#{@titulo},#{@ano_lancamento},#{@preco}"
 	end
 end
 
 class Estoque
 
-	:livros
-
 	def initialize
 		@livros = []
+		@livros.extend Contador
 	end
 
 	def imprime_nota_fiscal
@@ -83,15 +94,36 @@ class Estoque
 	def adiciona livro
 		@livros << livro if livro
 	end
+
+	def remove livro
+		@livros.delete livro
+	end
+
+	def maximo_necessario
+		@livros.maximo_necessario
+	end
 end
 
 estoque = Estoque.new
+
+livro_instanciado = Livro.new("Aivro Instanciado Errado",320,2017,true)
+estoque.adiciona livro_instanciado
+puts estoque.maximo_necessario
 estoque.adiciona Livro.new("Aprenda RoR Rapidinho",100,2017,true)
+puts estoque.maximo_necessario
 estoque.adiciona Livro.new("Não esqueça de JAVA",100,2002,false)
+puts estoque.maximo_necessario
 estoque.adiciona Livro.new("Algoritmos",100,1998,true)
+puts estoque.maximo_necessario
 estoque.adiciona Livro.new("Arquitetura de software",70,2011,true)
+puts estoque.maximo_necessario
+estoque.remove livro_instanciado
+puts estoque.maximo_necessario
 estoque.adiciona nil
 
+estoque.exporta_csv
+
+=begin
 estoque.imprime_nota_fiscal
 
 estoque.envia_news_letter
@@ -104,3 +136,5 @@ baratos.each do |barato|
 	puts "Barato! #{barato.titulo} - #{barato.preco}"
 end
 puts ""
+=end
+
