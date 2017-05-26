@@ -29,11 +29,15 @@ class Livro
 			"Sem reimpresao"	
 		end
 	end
+
+	def to_csv
+		"#{@titulo},#{@ano_lancamento},#{@preco}"
+	end
 end
 
 class Estoque
 
-	attr_reader :livros
+	:livros
 
 	def initialize
 		@livros = []
@@ -61,7 +65,7 @@ class Estoque
 
 	def exporta_csv
 		@livros.each do |livro|
-			puts "#{livro.titulo},#{livro.ano_lancamento}"
+			livro.to_csv
 		end
 		puts ""
 	end
@@ -71,13 +75,22 @@ class Estoque
 			livro.preco <= valor
 		end
 	end
+
+	def total
+		@livros.size
+	end
+
+	def adiciona livro
+		@livros << livro if livro
+	end
 end
 
 estoque = Estoque.new
-estoque.livros << Livro.new("Aprenda RoR Rapidinho",100,2017,true)
-estoque.livros << Livro.new("Não esqueça de JAVA",100,2002,false)
-estoque.livros << Livro.new("Algoritmos",100,1998,true)
-estoque.livros << Livro.new("Arquitetura de software",70,2011,true)
+estoque.adiciona Livro.new("Aprenda RoR Rapidinho",100,2017,true)
+estoque.adiciona Livro.new("Não esqueça de JAVA",100,2002,false)
+estoque.adiciona Livro.new("Algoritmos",100,1998,true)
+estoque.adiciona Livro.new("Arquitetura de software",70,2011,true)
+estoque.adiciona nil
 
 estoque.imprime_nota_fiscal
 
