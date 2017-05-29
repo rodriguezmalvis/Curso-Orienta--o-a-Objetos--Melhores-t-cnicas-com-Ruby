@@ -53,11 +53,11 @@ end
 puts ""
 =end
 
-rapid = Livro.new("Aprenda RoR Rapidinho",100,2010,true,"")
-delphi = Livro.new("Aprenda Delphi Rapidinho",100,2010,true,"")
-java = Livro.new("Não esqueça de JAVA",100,2002,false,"")
-algoritmos = Livro.new("Algoritmos",100,2010,true,"")
-arquitetura = Livro.new("Arquitetura de software",70,2010,true,"")
+rapid = Livro.new("Aprenda RoR Rapidinho",100,2010,true,"","livro")
+delphi = Livro.new("Aprenda Delphi Rapidinho",100,2010,true,"","livro")
+java = Livro.new("Não esqueça de JAVA",100,2002,false,"","livro")
+algoritmos = Livro.new("Algoritmos",100,2010,true,"","livro")
+arquitetura = Livro.new("Arquitetura de software",70,2010,true,"","livro")
 
 estoque.adiciona(rapid)
 estoque.adiciona(delphi)
@@ -80,6 +80,6 @@ estoque.venda(java)
 estoque.venda(java)
 estoque.venda(java)
 
-puts estoque.livro_mais_vendido_por_titulo.titulo
+puts estoque.livro_mais_vendido_por(&:titulo).titulo
 
-puts estoque.livro_mais_vendido_por_ano_lancamento.titulo
+puts estoque.livro_mais_vendido_por(&:ano_lancamento).titulo

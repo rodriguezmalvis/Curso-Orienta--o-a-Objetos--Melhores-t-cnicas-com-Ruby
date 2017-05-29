@@ -66,16 +66,8 @@ class Estoque
 		@vendas.count{ |venda| campo.call(venda) == campo.call(produto)}
 	end
 
-	def livro_mais_vendido_por_titulo
-		livros_que_mais_vendeu_por &:titulo
-	end
-
-	def livro_mais_vendido_por_ano_lancamento
-		livros_que_mais_vendeu_por &:ano_lancamento
-	end
-
-	def livro_mais_vendido_por_editora
-		livros_que_mais_vendeu_por &:editora
+	def livro_mais_vendido_por &campo 
+		livros_que_mais_vendeu_por "livro", &campo
 	end
 
 	def livros_que_mais_vendeu_por tipo, &campo
