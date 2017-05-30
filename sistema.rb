@@ -80,6 +80,10 @@ estoque.venda(java)
 estoque.venda(java)
 estoque.venda(java)
 
-puts estoque.livro_mais_vendido_por(&:titulo).titulo
+puts estoque.livro_mais_vendido_por_titulo.titulo
 
-puts estoque.livro_mais_vendido_por(&:ano_lancamento).titulo
+puts estoque.livro_mais_vendido_por_ano_lancamento.titulo
+
+puts estoque.respond_to?(:livro_mai_vendido_pr_ao_lancaento)
+puts estoque.respond_to?(:livro_mais_vendido_por_ano_lancamento)
+puts estoque.respond_to?(:get_livros)

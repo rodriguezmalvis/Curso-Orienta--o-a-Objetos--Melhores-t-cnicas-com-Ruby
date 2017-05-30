@@ -62,21 +62,6 @@ class Estoque
 		@vendas << livro
 	end
 
-	def quantidade_vendas_por produto, &campo
-		@vendas.count{ |venda| campo.call(venda) == campo.call(produto)}
-	end
-
-	def livro_mais_vendido_por &campo 
-		livros_que_mais_vendeu_por "livro", &campo
-	end
-
-	def livros_que_mais_vendeu_por tipo, &campo
-		@vendas.select{ |l| l.tipo == tipo }.sort{
-			|v1,v2| quantidade_vendas_por(v1, &campo) <=> 
-			quantidade_vendas_por(v2, &campo)
-		}.last	
-	end
-
 	def maximo_necessario
 		@livros.maximo_necessario
 	end
@@ -87,5 +72,39 @@ class Estoque
 
 	def get_livros
 		@livros	
+	end
+
+	def method_missing name
+		puts "Não encontrei: #{name}... Montando metodo"
+		matcher = name.to_s.match "(.+)_mais_vendido_por_(.+)"
+		if matcher
+			tipo = matcher[1]
+			campo = matcher[2].to_sym
+			que_mais_vendeu_por tipo, &campo
+		else
+			super
+		end
+	end
+
+	def respond_to? name
+		matcher = name.to_s.match ("(.+)_mais_vendido_por_(.+)")
+		if matcher
+			true
+		else
+			super
+		end
+	end
+
+	private 
+
+	def quantidade_vendas_por produto, &campo
+		@vendas.count{ |venda| campo.call(venda) == campo.call(produto)}
+	end
+
+	def que_mais_vendeu_por tipo, &campo
+		@vendas.select{ |l| l.tipo == tipo }.sort{
+			|v1,v2| quantidade_vendas_por(v1, &campo) <=> 
+			quantidade_vendas_por(v2, &campo)
+		}.last	
 	end
 end
