@@ -1,4 +1,6 @@
 require_relative "livro"
+require_relative "ebook"
+require_relative "revista"
 require_relative "estoque"
 require_relative "conversor"
 
@@ -53,29 +55,25 @@ end
 puts ""
 =end
 
-rapid = Livro.new("Aprenda RoR Rapidinho",100,2010,true,"","livro")
-delphi = Livro.new("Aprenda Delphi Rapidinho",100,2010,true,"","livro")
-java = Livro.new("Não esqueça de JAVA",100,2002,false,"","livro")
-algoritmos = Livro.new("Algoritmos",100,2010,true,"","livro")
-arquitetura = Livro.new("Arquitetura de software",70,2010,true,"","livro")
+java = Livro.new("Aprenda RoR Rapidinho",120,2010,true,true,"Editora 1")
+ruby = Revista.new("Revista sobre Ruby",110,2010,"Editora 1",24)
+c = Ebook.new("Ebook sobre c#",89,2010,"Editora 1")
 
-estoque.adiciona(rapid)
-estoque.adiciona(delphi)
-estoque.adiciona(java)
-estoque.adiciona(java)
-estoque.adiciona(java)
-estoque.adiciona(java)
-estoque.adiciona(algoritmos)
-estoque.adiciona(arquitetura)
-estoque.adiciona(arquitetura)
-estoque.adiciona(arquitetura)
 
-estoque.venda(rapid)
-estoque.venda(delphi)
-estoque.venda(algoritmos)
-estoque.venda(arquitetura)
-estoque.venda(arquitetura)
-estoque.venda(java)
+estoque.adiciona(ruby)
+estoque.adiciona(ruby)
+estoque.adiciona(java)
+estoque.adiciona(java)
+estoque.adiciona(java)
+estoque.adiciona(java)
+estoque.adiciona(ruby)
+estoque.adiciona(c)
+estoque.adiciona(c)
+estoque.adiciona(c)
+
+estoque.venda(ruby)
+estoque.venda(c)
+estoque.venda(c)
 estoque.venda(java)
 estoque.venda(java)
 estoque.venda(java)
@@ -86,4 +84,12 @@ puts estoque.livro_mais_vendido_por_ano_lancamento.titulo
 
 puts estoque.respond_to?(:livro_mai_vendido_pr_ao_lancaento)
 puts estoque.respond_to?(:livro_mais_vendido_por_ano_lancamento)
+puts estoque.respond_to?(:revista_mais_vendido_por_ano_lancamento)
+puts estoque.respond_to?(:ebook_mais_vendido_por_ano_lancamento)
 puts estoque.respond_to?(:get_livros)
+
+baratos =estoque.mais_baratos_que 90
+
+baratos.each do |barato|
+	puts "Barato! #{barato.titulo} - #{barato.preco}"
+end

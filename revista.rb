@@ -1,13 +1,12 @@
-class Livro
-	attr_reader :titulo, :preco, :ano_lancamento, :editora, :possui_sobrecapa
-	def initialize(titulo,preco,ano_lancamento,possui_reimpressao,possui_sobrecapa,editora)
+class Revista
+	attr_reader :titulo, :preco, :ano_lancamento, :editora, :numero
+	def initialize(titulo,preco,ano_lancamento,editora,numero)
 		@titulo = titulo
 		@preco = preco
 		@ano_lancamento = ano_lancamento
-		@possui_reimpressao = possui_reimpressao
-		@possui_sobrecapa = possui_sobrecapa
 		@preco = calcula_desconto
 		@editora = editora
+		@numero = numero
 	end
 
 	def calcula_desconto
@@ -33,7 +32,7 @@ class Livro
 	end
 
 	def matches? tipo
-		["livro","impresso"].include? tipo
+		["revista","digital"].include? tipo
 	end
 
 	def to_csv

@@ -54,7 +54,7 @@ class Estoque
 	end
 
 	def adiciona livro
-		@livros << livro if livro
+		@livros << livro
 	end
 
 	def venda livro
@@ -102,7 +102,7 @@ class Estoque
 	end
 
 	def que_mais_vendeu_por tipo, &campo
-		@vendas.select{ |l| l.tipo == tipo }.sort{
+		@vendas.select{ |l| l.matches?(tipo) }.sort{
 			|v1,v2| quantidade_vendas_por(v1, &campo) <=> 
 			quantidade_vendas_por(v2, &campo)
 		}.last	
