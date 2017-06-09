@@ -56,7 +56,7 @@ puts ""
 =end
 
 java = Livro.new("Aprenda RoR Rapidinho",120,2010,true,true,"Editora 1")
-ruby = Revista.new("Revista sobre Ruby",110,2010,"Editora 1",24)
+ruby = Revista.new("Revista sobre Ruby",110,2010,"Editora 1",24,1)
 c = Ebook.new("Ebook sobre c#",89,2010,"Editora 1")
 
 
